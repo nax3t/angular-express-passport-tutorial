@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="PassportApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Passport Angular</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	</head>
+	<body>
+		<nav ng-controller="NavCtrl">
+		   <a href="#home">Home</a> |
+		   <span ng-show="!currentUser">
+		     <a href="#login">Login</a> |
+		     <a href="#signup">Sign Up</a>
+		   </span>
+		   <span ng-show="currentUser">
+		     <a href="#profile">Profile</a> |
+		     <a href="#logout" ng-click="logout()">Logout</a>
+		   </span>
+		</nav>
+		<!-- Display current user info if logged in -->
+		{{currentUser}}
+		<div ng-view>
+
+		</div>
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!-- Angular -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+		<script src="./js/app.js" type="text/javascript"></script>
+		<script src="./js/controllers.js" type="text/javascript"></script>
+	</body>
+</html>
