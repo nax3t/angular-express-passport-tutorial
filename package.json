@@ -2,7 +2,7 @@
   "name": "passport-angular",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,11 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.0",
     "ejs": "^2.3.4",
     "ejs-mate": "^2.3.0",
     "express": "^4.13.3",
     "method-override": "^2.3.5",
     "mongoose": "^4.3.4",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "session": "^0.1.0"
   }
 }
