@@ -29,7 +29,6 @@ module.exports = function(app, passport) {
           var newUser = new db.User();
           newUser.username = req.body.username.toLowerCase();
           newUser.password = newUser.generateHash(req.body.password);
-          newUser.roles = ['student'];
           newUser.save(function(err, user) {
             req.login(user, function(err) {
               if (err) {
@@ -40,18 +39,20 @@ module.exports = function(app, passport) {
           });
         }
       });
-    });
+    }); 
 
-    // =====================================
-    // FACEBOOK ROUTES =====================
-    // =====================================
-    // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+     app.get('/auth/facebook', function authenticateFacebook (req, res, next) {
+        req.session.returnTo = '/#' + req.query.returnTo; 
+        next ();
+     },
+     passport.authenticate ('facebook'))
+     app.get('/auth/facebook/callback', function (req, res, next) {
+       var authenticator = passport.authenticate ('facebook', {
+         successRedirect: req.session.returnTo,
+         failureRedirect: '/login'
+        });
 
-    // handle the callback after facebook has authenticated the user
-    app.get('/auth/facebook/callback',
-      passport.authenticate('facebook'), function (req, res) {
-        console.log("*****REQUEST****",req);
-        res.json(req.user);
-      });
+      delete req.session.returnTo;
+      authenticator (req, res, next);
+    })
 };
