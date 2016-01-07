@@ -1,4 +1,4 @@
-var ids = {
+module.exports = {
 facebookAuth: {
    clientID: process.env.FB_CLIENT_ID,
    clientSecret: process.env.FB_SECRET,
@@ -6,4 +6,3 @@ facebookAuth: {
    enableProof: false
   }
 }
-module.exports = ids

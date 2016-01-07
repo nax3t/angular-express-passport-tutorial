@@ -270,10 +270,12 @@ Great, now let's create out views. Copy the following code into each respective 
 ```html
 <h1>Sign Up</h1>
 
-<input ng-model="user.username"/></br>
-<input ng-model="user.password" type="password" /></br>
-<input ng-model="user.password2" type="password" /></br>
-<button ng-click="signup(user)">Sign Up</button>
+<p>
+  <input ng-model="user.username"/></br>
+  <input ng-model="user.password" type="password" /></br>
+  <input ng-model="user.password2" type="password" /></br>
+  <button ng-click="signup(user)">Sign Up</button>
+</p>
 ```
 
 # Login
@@ -281,9 +283,11 @@ Great, now let's create out views. Copy the following code into each respective 
 ```html
 <h1>Login</h1>
 
-<input ng-model="user.username"/></br>
-<input ng-model="user.password" type="password"/></br>
-<button ng-click="login(user)">Login</button>
+<p>
+  <input ng-model="user.username"/></br>
+  <input ng-model="user.password" type="password"/></br>
+  <button ng-click="login(user)">Login</button>
+</p>
 ```
 
 # Profile

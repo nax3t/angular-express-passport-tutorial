@@ -39,9 +39,7 @@ module.exports = function(passport) {
 	  }
 	));
 
-  // =========================================================================
-  // FACEBOOK ================================================================
-  // =========================================================================
+  // Facebook strategy
   passport.use(new FacebookStrategy({
 
      // pull in our app id and secret from our auth.js file
