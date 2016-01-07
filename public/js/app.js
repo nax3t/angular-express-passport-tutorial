@@ -15,7 +15,6 @@ app.config(function($routeProvider) {
     })
     .when('/profile', {
       templateUrl: 'views/profile.html',
-      controller: 'ProfileCtrl',
       resolve: {
         logincheck: checkLoggedin
       }

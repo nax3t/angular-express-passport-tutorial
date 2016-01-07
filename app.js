@@ -6,6 +6,7 @@ app.use(express.static(__dirname + '/public'));
 //Passport
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+require('./config/passport')(passport); // pass passport for configuration
 
 //Database
 var mongoose = require('mongoose');
@@ -28,51 +29,25 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    //Consultando o usuário
-    db.User.findOne({
-      username: username,
-      password: password
-    }, function(err, user) {
-      if (user) {
-        return done(null, user);
-      }
-      return done(null, false, {
-        message: 'Unable to login'
-      });
-    });
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
-//Foi acrescentado a autenticação
-app.post("/login", passport.authenticate('local'), function(req, res) {
-  //console.log("/login");
-  //console.log(req.user);
+// routes ======================================================================
+// require('./routes/auth.js')(app, passport); // load our routes and pass in our app and fully configured passport
+// process the login form
+app.post("/login", passport.authenticate('local-login'), function(req, res) {
   res.json(req.user);
 });
 
-//Criando o logout
+// handle logout
 app.post("/logout", function(req, res) {
   req.logOut();
   res.send(200);
 })
 
-
-//Criando o loggedin
+// loggedin
 app.get("/loggedin", function(req, res) {
   res.send(req.isAuthenticated() ? req.user : '0');
 });
 
-//Criando o registro do usuário
+// signup
 app.post("/signup", function(req, res) {
   db.User.findOne({
     username: req.body.username
@@ -81,7 +56,10 @@ app.post("/signup", function(req, res) {
       res.json(null);
       return;
     } else {
-      var newUser = new db.User(req.body);
+    	console.log("Hello world", req.body)
+      var newUser = new db.User();
+      newUser.username = req.body.username;
+      newUser.password = newUser.generateHash(req.body.password);
       newUser.roles = ['student'];
       newUser.save(function(err, user) {
         req.login(user, function(err) {
@@ -93,23 +71,6 @@ app.post("/signup", function(req, res) {
       });
     }
   });
-  //var newUser = req.body;
-  //console.log(newUser);
 });
-
-//Function para não deixar ver o json de usuarios acessando pela URL
-var auth = function(req, res, next) {
-  if (!req.isAuthenticated())
-    res.send(401);
-  else
-    next();
-}
-
-//Listar usuarios somente se for role admin
-app.get("/rest/user", auth, function(req, res) {
-  db.User.find(function(err, users) {
-    res.json(users);
-  });
-})
 
 app.listen(3000);
