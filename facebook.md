@@ -7,6 +7,8 @@ First thing we'll want to do is add a few more dependencies to our `package.json
 "passport-facebook": "^2.0.0"
 ```
 
+Be sure to run `npm install`
+
 We'll use `passport-facebook` for our passport strategy configuration and `dotenv` to hide our API's secret key and client ID.
 
 Begin by visiting the [Facebook developer's portal](https://developers.facebook.com/) and where it says `My Apps` select `Add a New App` from the dropdown. Select `WWW` from the app options, enter a name for your app, click through and enter a category, click through again, scroll down to app configuration and enter your site url `http://localhost:3000/auth/facebook/callback`. 
