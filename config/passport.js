@@ -17,9 +17,8 @@ module.exports = function(passport) {
 
 	passport.use('local-login', new LocalStrategy(
 	  function(username, password, done) {
-	    //Consultando o usuário
 	    User.findOne({
-	      username: username
+	      username: username.toLowerCase()
 	    }, function(err, user) {
 	      // if there are any errors, return the error before anything else
            if (err)

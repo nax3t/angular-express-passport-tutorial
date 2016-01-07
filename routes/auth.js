@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
           return;
         } else {
           var newUser = new db.User();
-          newUser.username = req.body.username;
+          newUser.username = req.body.username.toLowerCase();
           newUser.password = newUser.generateHash(req.body.password);
           newUser.roles = ['student'];
           newUser.save(function(err, user) {
