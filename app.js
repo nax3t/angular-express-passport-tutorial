@@ -5,7 +5,6 @@ app.use(express.static(__dirname + '/public'));
 
 //Passport
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 require('./config/passport')(passport); // pass passport for configuration
 
 //Database
