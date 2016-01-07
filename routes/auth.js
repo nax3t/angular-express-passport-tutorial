@@ -1,3 +1,5 @@
+var db = require("../models");
+
 module.exports = function(app, passport) {
     // process the login form
     app.post("/login", passport.authenticate('local-login'), function(req, res) {
@@ -26,7 +28,8 @@ module.exports = function(app, passport) {
         } else {
           var newUser = new db.User();
           newUser.username = req.body.username;
-          newUser.password = newUser.generateHash(password);
+          newUser.password = newUser.generateHash(req.body.password);
+          newUser.roles = ['student'];
           newUser.save(function(err, user) {
             req.login(user, function(err) {
               if (err) {

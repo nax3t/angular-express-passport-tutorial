@@ -12,7 +12,6 @@ app.controller("NavCtrl", function($rootScope, $scope, $http, $location) {
 
 app.controller("SignUpCtrl", function($scope, $http, $rootScope, $location) {
   $scope.signup = function(user) {
-    console.log(user);
 
     // TODO: verify passwords are the same and notify user
     if (user.password == user.password2) {
@@ -20,7 +19,6 @@ app.controller("SignUpCtrl", function($scope, $http, $rootScope, $location) {
         .success(function(user) {
           $rootScope.currentUser = user;
           $location.url("/profile");
-          console.log(user);
         });
     }
   }
@@ -28,10 +26,8 @@ app.controller("SignUpCtrl", function($scope, $http, $rootScope, $location) {
 
 app.controller("LoginCtrl", function($location, $scope, $http, $rootScope) {
   $scope.login = function(user) {
-    console.log(user);
     $http.post('/login', user)
       .success(function(response) {
-        console.log(response);
         $rootScope.currentUser = response;
         $location.url("/profile");
       });
