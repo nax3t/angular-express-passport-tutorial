@@ -395,3 +395,13 @@ That's it! Now fire up your server and give it a try, you should now have a work
 
 - [Express and Passport - Scotch.io](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 - [Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
+
+--------------------------
+
+# What's next?
+
+Follow these docs/tutorials to figure out how to setup a strategy for facebook (or any other of the third party websites you'd like to authenticate from).
+
+- [Passport docs](http://passportjs.org/docs/facebook)
+- [Scotch tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
+- [Passport-facebook npm docs](https://www.npmjs.com/package/passport-facebook)
