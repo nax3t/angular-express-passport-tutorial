@@ -152,3 +152,6 @@ All done! Bear in mind this is a very basic implementation, if you're going to u
 - [Redirection issue](https://github.com/jaredhanson/passport-facebook/issues/106)
 
 --------------------------
+
+Shout out to Tim Garcia and Elie Schoppik for helping out!
+

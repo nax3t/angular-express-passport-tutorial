@@ -394,5 +394,4 @@ That's it! Now fire up your server and give it a try, you should now have a work
 - [Express and Passport - Scotch.io](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 - [Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
 
-Shout out to Tim Garcia and Elie Schoppik for helping out!
 --------------------------
