@@ -1,6 +1,12 @@
 <h1>Sign Up</h1>
 
-<input ng-model="user.username"/></br>
-<input ng-model="user.password" type="password" /></br>
-<input ng-model="user.password2" type="password" /></br>
-<button ng-click="signup(user)">Sign Up</button>
+<p>
+	<input ng-model="user.username"/></br>
+	<input ng-model="user.password" type="password" /></br>
+	<input ng-model="user.password2" type="password" /></br>
+	<button ng-click="signup(user)">Sign Up</button>
+</p>
+
+<p>Sign Up or Register with:</p>
+
+<a href="/auth/facebook?returnTo={{'/profile'}}" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>

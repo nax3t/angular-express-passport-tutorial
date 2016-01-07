@@ -41,18 +41,20 @@ module.exports = function(app, passport) {
       });
     }); 
 
-     app.get('/auth/facebook', function authenticateFacebook (req, res, next) {
-        req.session.returnTo = '/#' + req.query.returnTo; 
-        next ();
-     },
-     passport.authenticate ('facebook'))
-     app.get('/auth/facebook/callback', function (req, res, next) {
-       var authenticator = passport.authenticate ('facebook', {
-         successRedirect: req.session.returnTo,
-         failureRedirect: '/login'
-        });
+    // Facebook auth routes
+    app.get('/auth/facebook', function authenticateFacebook (req, res, next) {
+      req.session.returnTo = '/#' + req.query.returnTo; 
+      next ();
+    },
+    passport.authenticate ('facebook'));
 
-      delete req.session.returnTo;
-      authenticator (req, res, next);
+    app.get('/auth/facebook/callback', function (req, res, next) {
+     var authenticator = passport.authenticate ('facebook', {
+       successRedirect: req.session.returnTo,
+       failureRedirect: '/'
+      });
+
+    delete req.session.returnTo;
+    authenticator (req, res, next);
     })
 };

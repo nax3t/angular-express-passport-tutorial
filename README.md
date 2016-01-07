@@ -117,7 +117,6 @@ module.exports = function(app, passport) {
           var newUser = new db.User();
           newUser.username = req.body.username.toLowerCase();
           newUser.password = newUser.generateHash(req.body.password);
-          newUser.roles = ['student'];
           newUser.save(function(err, user) {
             req.login(user, function(err) {
               if (err) {
@@ -383,6 +382,8 @@ app.controller("LoginCtrl", function($location, $scope, $http, $rootScope) {
 
 That's it! Now fire up your server and give it a try, you should now have a working local authentication stratey in place. Don't forget to run `mongod` in a separate tab before starting your server.
 
+[# Facebook strategy tutorial](./facebook.md)
+
 -------------------------
 ## Sources
 
@@ -390,11 +391,3 @@ That's it! Now fire up your server and give it a try, you should now have a work
 - [Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
 
 --------------------------
-
-# What's next?
-
-Follow these docs/tutorials to figure out how to setup a strategy for facebook (or any other of the third party websites you'd like to authenticate from).
-
-- [Passport docs](http://passportjs.org/docs/facebook)
-- [Scotch tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
-- [Passport-facebook npm docs](https://www.npmjs.com/package/passport-facebook)
