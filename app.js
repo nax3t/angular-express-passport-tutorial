@@ -7,9 +7,6 @@ app.use(express.static(__dirname + '/public'));
 var passport = require('passport');
 require('./config/passport')(passport); // pass passport for configuration
 
-//Database
-var mongoose = require('mongoose');
-
 //Cookie and session
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
