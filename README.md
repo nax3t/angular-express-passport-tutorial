@@ -297,7 +297,7 @@ Great, now let's create out views. Copy the following code into each respective 
 ```html
 <h1>Profile</h1>
 
-<h3>User: {{ currentUser.username | filter : capitalize }}</h3>
+<h3>User: {{ currentUser.username }}</h3>
 ```
 
 Alright we're almost there! Let's add our main angular logic to the `app.js` file inside of the `js` directory:
@@ -346,14 +346,6 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
   });
   return deferred.promise;
 }
-
-app.filter('capitalize', function() {
-  return function(input, scope) {
-    if (input!=null)
-    input = input.toLowerCase();
-    return input.substring(0,1).toUpperCase()+input.substring(1);
-  }
-});
 ```
 
 And finally, put the following code into the `controllers.js` file, also living inside of the `js` folder:
