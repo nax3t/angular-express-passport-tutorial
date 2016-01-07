@@ -1,4 +1,5 @@
 # Passport Authentication with Express and Angular JS
+A quick source code tutorial for adding passport authentication to a MEAN stack app
 
 First create an express app, you'll need the following node packages in your package.json:
 
@@ -296,7 +297,7 @@ Great, now let's create out views. Copy the following code into each respective 
 ```html
 <h1>Profile</h1>
 
-<h3>User: {{ currentUser.username | filter : capitalize }}</h3>
+<h3>User: {{ currentUser.username }}</h3>
 ```
 
 Alright we're almost there! Let's add our main angular logic to the `app.js` file inside of the `js` directory:
@@ -345,14 +346,6 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
   });
   return deferred.promise;
 }
-
-app.filter('capitalize', function() {
-  return function(input, scope) {
-    if (input!=null)
-    input = input.toLowerCase();
-    return input.substring(0,1).toUpperCase()+input.substring(1);
-  }
-});
 ```
 
 And finally, put the following code into the `controllers.js` file, also living inside of the `js` folder:
@@ -400,5 +393,15 @@ That's it! Now fire up your server and give it a try, you should now have a work
 -------------------------
 ## Sources
 
-[Express and Passport - Scotch.io](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
-[Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
+- [Express and Passport - Scotch.io](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
+- [Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
+
+--------------------------
+
+# What's next?
+
+Follow these docs/tutorials to figure out how to setup a strategy for facebook (or any other of the third party websites you'd like to authenticate from).
+
+- [Passport docs](http://passportjs.org/docs/facebook)
+- [Scotch tutorial](https://scotch.io/tutorials/easy-node-authentication-facebook)
+- [Passport-facebook npm docs](https://www.npmjs.com/package/passport-facebook)
