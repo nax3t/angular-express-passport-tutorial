@@ -1,47 +1,46 @@
-# Passport Authentication with Express and Angular JS
+# Passport Authentication with Express and Angular
 A quick source code tutorial for adding passport authentication to a MEAN stack app
 
 First create an express app, you'll need the following node packages in your package.json:
 
 ```
-    "express": "^4.13.3",
+  "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.0",
-    "ejs": "^2.3.4",
+    "express": "^4.13.3",
     "express-session": "^1.12.1",
     "mongoose": "^4.3.4",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
+  }
 ```
 
 Now structure your app as follows:
 
 ```
--> app_name
-	-> config
-		-> passport.js
-	-> models
-		-> index.js
-		-> user.js
-	-> node_modules
-		-> packages here by default*
-	-> public
-		-> js
-			-> app.js
-			-> controllers.js
-		-> views
-			-> home.html
-			-> login.html
-			-> profile.html
-			-> signup.html
-		-> index.html
-	-> routes
-		-> auth.js
--> .gitignore
--> app.js
--> package.json
+-- app_name
+---- config
+-------- passport.js
+---- models
+-------- index.js
+-------- user.js
+---- public
+------ js
+---------- app.js
+---------- controllers.js
+------ views
+---------- home.html
+---------- login.html
+---------- profile.html
+---------- signup.html
+------ index.html
+---- routes
+-------- auth.js
+---- .gitignore
+---- app.js
+---- package.json
 ```
 
 Be sure to add `node_modules` to your .gitignore
@@ -58,11 +57,7 @@ app.use(express.static(__dirname + '/public'));
 
 //Passport
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 require('./config/passport')(passport); // pass passport for configuration
-
-//Database
-var mongoose = require('mongoose');
 
 //Cookie and session
 var cookieParser = require('cookie-parser');
@@ -351,8 +346,6 @@ var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
 And finally, put the following code into the `controllers.js` file, also living inside of the `js` folder:
 
 ```js
-var app = angular.module("PassportApp");
-
 app.controller("NavCtrl", function($rootScope, $scope, $http, $location) {
   $scope.logout = function() {
     $http.post("/logout")
