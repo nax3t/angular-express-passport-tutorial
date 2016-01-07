@@ -1,7 +1,5 @@
-# Angular-Express-Passport-Tutorial
-A quick source code tutorial for adding passport authentication to a MEAN stack app
-
 # Passport Authentication with Express and Angular JS
+A quick source code tutorial for adding passport authentication to a MEAN stack app
 
 First create an express app, you'll need the following node packages in your package.json:
 
