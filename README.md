@@ -362,7 +362,6 @@ app.controller("NavCtrl", function($rootScope, $scope, $http, $location) {
 app.controller("SignUpCtrl", function($scope, $http, $rootScope, $location) {
   $scope.signup = function(user) {
 
-    // TODO: verify passwords are the same and notify user
     if (user.password == user.password2) {
       $http.post('/signup', user)
         .success(function(user) {
@@ -393,5 +392,5 @@ That's it! Now fire up your server and give it a try, you should now have a work
 
 - [Express and Passport - Scotch.io](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 - [Angular, Express and Passport - YouTube tutorial](https://www.youtube.com/watch?v=jtaSRzP0i30&feature=youtu.be)
-
+- [Source code from tutorial above](https://github.com/soaresdiogo/authenticatePassport)
 --------------------------
