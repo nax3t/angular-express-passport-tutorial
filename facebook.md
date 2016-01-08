@@ -23,7 +23,7 @@ Now visit the [Facebook developer's portal](https://developers.facebook.com/) an
 
 Scroll to the bottom and select `skip to the developer dashboard`, this is where you'll get access to your Client ID and Secret Key.
 
-Take that information and enter it into a `.env` file inside of your app's root directory.
+Take that information and enter it into a `.env` file inside of your app's root directory. (First be sure to add `.env` to your `.gitignore` file)
 
 ```
 FB_CLIENT_ID=123456789
