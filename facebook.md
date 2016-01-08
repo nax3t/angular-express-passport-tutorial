@@ -11,9 +11,17 @@ Be sure to run `npm install`
 
 We'll use `passport-facebook` for our passport strategy configuration and `dotenv` to hide our API's secret key and client ID.
 
-Begin by visiting the [Facebook developer's portal](https://developers.facebook.com/) and where it says `My Apps` select `Add a New App` from the dropdown. Select `WWW` from the app options, enter a name for your app, click through and enter a category, click through again, scroll down to app configuration and enter your site url `http://localhost:3000/auth/facebook/callback`. 
+Now open up your backend's `app.js` file from your app's root directory and add the following after your `body-parser` code:
 
-Now scroll to the bottom and select `skip to the developer dashboard`, this is where you'll get access to your Client ID and Secret Key.
+```js
+//Load .env file
+var dotenv = require('dotenv');
+dotenv.load();
+```
+
+Now visit the [Facebook developer's portal](https://developers.facebook.com/) and where it says `My Apps` select `Add a New App` from the dropdown. Select `WWW` from the app options, enter a name for your app, click through and enter a category, click through again, scroll down to app configuration and enter your site url `http://localhost:3000/auth/facebook/callback`. 
+
+Scroll to the bottom and select `skip to the developer dashboard`, this is where you'll get access to your Client ID and Secret Key.
 
 Take that information and enter it into a `.env` file inside of your app's root directory.
 
@@ -24,14 +32,6 @@ FB_CALLBACK_URL=http://localhost:3000/auth/facebook/callback
 ```
 
 Replace everything after the `=` signs with your information, the FB_CALLBACK_URL should remain the same.
-
-Now open up your backend's `app.js` file from your app's root directory and add the following after your `body-parser` code:
-
-```js
-//Load .env file
-var dotenv = require('dotenv');
-dotenv.load();
-```
 
 _Note: This should work fine, but if your app still won't recognize the ENV variables, try exporting them manually from the command line, e.g., open up your terminal and type: `export FB_CLIENT_ID=123456789` and do the same for your FB_SECRET and FB_CALLBACK_URL_
 
@@ -110,6 +110,24 @@ function(token, refreshToken, profile, done) {
 }));
 ```
 
+Okay, the facebook-strategy is in place, but we need to update our user model to reflect the code in our passport configuration. Open up `app_name -> models -> user.js` and replace your user schema with:
+
+```js
+// define the schema for our user model
+var userSchema = mongoose.Schema({
+  username: String,
+  password: String,
+  email: String,
+  firstName: String,
+  lastName: String,
+  facebook: {
+    id: String,
+    token: String,
+    name: String
+  }
+});
+```
+
 We're almost done, now let's go add the backend routes that allow us to grant access from facebook and redirect to our app. Open up `app_name -> routes -> auth.js` and add the following code before the closing `};` bracket from `module.exports = function(app, passport) {`:
 
 ```js
@@ -132,7 +150,7 @@ authenticator (req, res, next);
 })
 ```
 
-Lastly, let's add a login link to both our `login` and `signup` pages (inside of `app_name -> public -> views`:
+Let's add a facebook login button to both our `login` and `signup` pages (inside of `app_name -> public -> views`:
 
 ```html
 <p>Login or Register with:</p>
@@ -141,6 +159,16 @@ Lastly, let's add a login link to both our `login` and `signup` pages (inside of
 ```
 
 You can see how the query string from the end of the anchor tag's href will allow us to redirect to a route being used by the angular router, thus bridging us from the backend routing to the front end.
+
+One last thing, let's make sure the `profile` page will display the user's name when they log in with facebook.
+
+Open up `app_name -> public -> views -> profile.html` and replace the code there with:
+
+```html
+<h1>Profile</h1>
+
+<h3>User: {{ currentUser.username || currentUser.facebook.name }}</h3>
+```
 
 All done! Bear in mind this is a very basic implementation, if you're going to use this in production you'll want to add some error handling.
 
